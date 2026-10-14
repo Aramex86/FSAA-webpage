@@ -6,7 +6,9 @@
  */
 const nextConfig = {
   output: 'export',
-  trailingSlash: false,
+  basePath: '/fsaa',
+  assetPrefix: '/fsaa',
+  trailingSlash: true,
   reactStrictMode: true,
   images: { unoptimized: true }
 };
