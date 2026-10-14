@@ -1,0 +1,7 @@
+node_modules
+.next
+out
+out.zip
+build
+next-env.d.ts
+*.tsbuildinfo

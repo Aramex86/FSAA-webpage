@@ -1,0 +1,28 @@
+{
+  "name": "fsaa-site",
+  "version": "0.1.0",
+  "private": true,
+  "description": "FSAA — Feature-Sliced Atomic Architecture. Documentation site. Built with FSAA itself: Next.js App Router mapped onto the five layers.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "next": "15.1.6",
+    "react": "19.0.0",
+    "react-dom": "19.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.7",
+    "@types/react": "^19.0.7",
+    "@types/react-dom": "^19.0.3",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "15.1.6",
+    "eslint-import-resolver-typescript": "^3.7.0",
+    "eslint-plugin-import": "^2.31.0",
+    "typescript": "^5.7.3"
+  }
+}

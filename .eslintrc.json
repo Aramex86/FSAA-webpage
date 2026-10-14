@@ -1,0 +1,107 @@
+{
+  "root": true,
+  "extends": ["next/core-web-vitals"],
+  "plugins": ["import"],
+  "settings": {
+    "import/resolver": {
+      "typescript": { "project": "./tsconfig.json", "alwaysTryTypes": true }
+    }
+  },
+  "rules": {
+    "import/no-restricted-paths": [
+      "error",
+      {
+        "zones": [
+          {
+            "target": "./src/shared",
+            "from": ["./src/entities", "./src/features", "./src/app"],
+            "message": "FSAA: shared must stay business-free — it may import external libs only."
+          },
+          {
+            "target": "./src/entities",
+            "from": ["./src/features", "./src/app"],
+            "message": "FSAA: entities may import shared only (downward imports only)."
+          },
+          {
+            "target": "./src/features",
+            "from": ["./src/app"],
+            "message": "FSAA: features may import entities and shared only."
+          },
+          {
+            "target": "./src/app",
+            "from": ["./src/entities"],
+            "message": "FSAA: no layer skipping — pages go through features, never straight into entities."
+          },
+          {
+            "target": "./src/!(app)/*",
+            "from": "./src/app",
+            "message": "FSAA: nothing imports the app/pages layer (downward imports only)."
+          }
+        ]
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": ["src/shared/**/*.{ts,tsx}"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": ["@/entities/*", "@/features/*", "@/app/*"],
+                "message": "FSAA: shared imports external libs only."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": ["src/features/**/*.{ts,tsx}"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              { "group": ["@/app/*"], "message": "FSAA: features never import the app/pages layer." },
+              {
+                "group": ["@/features/*"],
+                "message": "FSAA: no cross-feature imports — promote the shared part to shared/ui instead."
+              },
+              {
+                "group": [
+                  "@/entities/*/model/*",
+                  "@/entities/*/api/*",
+                  "@/entities/*/config/*",
+                  "@/features/*/ui/*",
+                  "@/features/*/model/*",
+                  "@/features/*/config/*"
+                ],
+                "message": "FSAA: import a module's public API (index.ts), never its internals."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": ["src/app/**/*.{ts,tsx}"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              { "group": ["@/entities/*"], "message": "FSAA: no layer skipping — pages import features and shared." },
+              {
+                "group": ["@/features/*/ui/*", "@/features/*/model/*", "@/features/*/config/*"],
+                "message": "FSAA: import a feature's public API (index.ts)."
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
