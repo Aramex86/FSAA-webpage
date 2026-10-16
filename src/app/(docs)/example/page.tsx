@@ -2,7 +2,7 @@ import { Callout, DataTable, PageHeader } from '@/shared/ui/molecules';
 import type { Column } from '@/shared/ui/molecules';
 import { CodeViewer } from '@/features/code-viewer';
 import { DocsPager } from '@/features/docs-pager';
-import { SITE } from '@/shared/config/site';
+import { SITE, docPageMetadata } from '@/shared/config/site';
 import { crumbFor } from '@/features/docs-registry';
 
 const TREE = `src/
@@ -104,6 +104,13 @@ const traceColumns: Column<TraceRow>[] = [
   { header: 'Unit', render: (row) => row.unit },
   { header: 'Imports', render: (row) => row.imports },
 ];
+
+export const metadata = docPageMetadata({
+  title: 'Worked example: generic DataTable in shared, business columns in features',
+  description:
+    'A Projects/Orders worked example: the table component stays generic in shared, business columns live in features. Step-by-step FSAA trace of an accounting table.',
+  slug: '/example',
+});
 
 export default function ExamplePage() {
   return (

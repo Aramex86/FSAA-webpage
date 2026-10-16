@@ -5,6 +5,7 @@ import { DocsPager } from "@/features/docs-pager";
 import { RepoCta } from "@/features/repo-cta";
 import { SITE } from "@/shared/config/site";
 import { crumbFor } from "@/features/docs-registry";
+import { docPageMetadata } from '@/shared/config/site';
 
 type Phase = {
   id: string;
@@ -84,6 +85,13 @@ const gapColumns: Column<GapRow>[] = [
   { header: "Known gap", render: (row) => row.gap },
   { header: "Plan", render: (row) => row.plan },
 ];
+
+export const metadata = docPageMetadata({
+  title: 'FSAA roadmap: boilerplate, CLI, lint checker',
+  description:
+    'FSAA roadmap: what lands next — starter boilerplate, CLI scaffold, lint checker for layer boundaries, and the stable v0.1 spec of the methodology.',
+  slug: '/roadmap',
+});
 
 export default function RoadmapPage() {
   return (

@@ -4,6 +4,7 @@ import { crumbFor } from '@/features/docs-registry';
 import { LayerStackExplorer } from '@/features/layer-stack-explorer';
 import { DocsPager } from '@/features/docs-pager';
 import { importRules, LayerTable } from '@/features/layer-stack';
+import { docPageMetadata } from '@/shared/config/site';
 
 const ENTITY_API = `// entities/account/index.ts — public API of an entity
 export { type Account, createEmptyAccount } from './model/types';
@@ -20,6 +21,13 @@ import/no-restricted-paths: [
     { target: './src/features', from: './src/app' }, // no skipping layers
   ]}],
 ]`;
+
+export const metadata = docPageMetadata({
+  title: 'Architecture: five layers, import rules',
+  description:
+    'FSAA architecture: five layers (app, pages, features, entities, shared), strict import rules, no organisms layer. How boundaries are enforced in review and tooling.',
+  slug: '/architecture',
+});
 
 export default function ArchitecturePage() {
   return (

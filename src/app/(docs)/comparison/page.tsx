@@ -1,8 +1,15 @@
 import { Callout, PageHeader } from '@/shared/ui/molecules';
 import { ComparisonMatrix } from '@/features/comparison-matrix';
 import { DocsPager } from '@/features/docs-pager';
-import { SITE } from '@/shared/config/site';
+import { SITE, docPageMetadata } from '@/shared/config/site';
 import { crumbFor } from '@/features/docs-registry';
+
+export const metadata = docPageMetadata({
+  title: 'FSAA vs FSD vs Atomic Design vs Bulletproof React',
+  description:
+    'Side-by-side comparison: FSAA vs Feature-Sliced Design vs Atomic Design vs Bulletproof React. Where they agree, what FSAA removes (widgets, organisms), what it adds (decision rules).',
+  slug: '/comparison',
+});
 
 export default function ComparisonPage() {
   return (

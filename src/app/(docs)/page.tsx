@@ -3,8 +3,16 @@ import { Callout, Card, PageHeader, ProofBadge } from '@/shared/ui/molecules';
 import { LayerStackExplorer } from '@/features/layer-stack-explorer';
 import { DocsPager } from '@/features/docs-pager';
 import { RepoCta } from '@/features/repo-cta';
-import { SITE } from '@/shared/config/site';
+import { SITE, docPageMetadata } from '@/shared/config/site';
 import { crumbFor } from '@/features/docs-registry';
+
+export const metadata = docPageMetadata({
+  absoluteTitle: 'FSAA — Where does UI go? FSD + Atomic Design unified',
+  title: 'FSAA — Feature-Sliced Atomic Architecture',
+  description:
+    'FSAA unifies Feature-Sliced Design and Atomic Design and answers the question both leave open: where does UI go? Decision rules, layers, graduation pattern.',
+  slug: '/',
+});
 
 export default function HomePage() {
   return (

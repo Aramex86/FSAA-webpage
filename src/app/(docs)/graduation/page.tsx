@@ -1,7 +1,7 @@
 import { Callout, Card, PageHeader } from '@/shared/ui/molecules';
 import { CodeViewer } from '@/features/code-viewer';
 import { DocsPager } from '@/features/docs-pager';
-import { SITE } from '@/shared/config/site';
+import { SITE, docPageMetadata } from '@/shared/config/site';
 import { crumbFor } from '@/features/docs-registry';
 
 const STAGE_1 = `// Stage 1 — the component lives inside its feature. Fully owned.
@@ -15,6 +15,13 @@ shared/ui/molecules/PeriodPicker/
   ├─ PeriodPicker.tsx  // implementation
   └─ PeriodPicker.css
 // features import it via '@/shared/ui/molecules'. Stage 1 code is deleted.`;
+
+export const metadata = docPageMetadata({
+  title: 'The graduation pattern: when UI moves from feature to shared',
+  description:
+    'The FSAA graduation pattern: features own their UI until it earns sharing. Concrete rules for promoting components from feature code to shared without premature abstraction.',
+  slug: '/graduation',
+});
 
 export default function GraduationPage() {
   return (

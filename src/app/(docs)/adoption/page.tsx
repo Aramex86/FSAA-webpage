@@ -2,6 +2,14 @@ import { Chip } from '@/shared/ui/atoms';
 import { Callout, PageHeader } from '@/shared/ui/molecules';
 import { DocsPager } from '@/features/docs-pager';
 import { crumbFor } from '@/features/docs-registry';
+import { docPageMetadata } from '@/shared/config/site';
+
+export const metadata = docPageMetadata({
+  title: 'Adopting FSAA in an existing codebase',
+  description:
+    'Adoption guide for FSAA: increment rules, review checklist, boundary test for shared, enforcement through lint rules. How to migrate from FSD or Atomic Design without a rewrite.',
+  slug: '/adoption',
+});
 
 export default function AdoptionPage() {
   return (

@@ -1,5 +1,42 @@
 /* shared/config — global, business-free site configuration. */
 
+import type { Metadata } from 'next';
+
+/* Phase 1.5 — canonical origin of the deployed docs site (GitHub Pages project site). */
+export const SITE_URL = 'https://aramex86.github.io/fsaa';
+export const OG_IMAGE_URL = `${SITE_URL}/og.png`;
+
+export function docPageMetadata(opts: {
+  absoluteTitle?: string;
+  title: string;
+  description: string;
+  slug: string;
+}): Metadata {
+  const url = opts.slug === '/' ? `${SITE_URL}/` : `${SITE_URL}${opts.slug}/`;
+  const title = opts.absoluteTitle ?? opts.title;
+  return {
+    title: opts.slug === '/' ? { absolute: title } : title,
+    description: opts.description,
+    alternates: { canonical: url },
+    openGraph: {
+      title,
+      description: opts.description,
+      url,
+      siteName: 'FSAA — Feature-Sliced Atomic Architecture',
+      type: 'website',
+      images: [
+        {
+          url: OG_IMAGE_URL,
+          width: 1200,
+          height: 630,
+          alt: 'FSAA — Feature-Sliced Atomic Architecture',
+        },
+      ],
+    },
+    twitter: { card: 'summary_large_image', title, description: opts.description },
+  };
+}
+
 export const SITE = {
   name: 'FSAA',
   fullName: 'Feature-Sliced Atomic Architecture',
