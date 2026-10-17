@@ -1,7 +1,4 @@
-/* Entity docs-page — static registry of all documentation pages.
-   Single source of truth for slugs, ordering and navigation groups. */
-
-import type { DocsPage, DocsPageId, NavGroup, NavSection } from './types';
+import type { DocsPage, DocsPageId, NavGroup, NavSection, NavExtSection } from './types';
 
 export const NAV_GROUPS: NavGroup[] = ['Overview', 'Core rules', 'In practice', 'Context'];
 
@@ -102,3 +99,35 @@ export function getCrumb(id: DocsPageId): string {
   const page = getDocsPage(id);
   return `${page.group} · FSAA docs`;
 }
+
+/* External nav sections — starter templates + methodology repo.
+   Rendered by the sidebar after the doc-page sections;
+   filterable together with the doc pages (see docs-sidebar filterNav). */
+export const NAV_EXT_SECTIONS: NavExtSection[] = [
+  {
+    group: 'Templates',
+    links: [
+      {
+        id: 'tpl-next',
+        href: 'https://github.com/Aramex86/fsaa-react',
+        nav: 'Next.js App Router ›',
+        note: 'Next.js 15 + React 19 template',
+        keywords: ['template', 'next', 'nextjs', 'app router', 'boilerplate', 'starter'],
+      },
+      {
+        id: 'tpl-vite',
+        href: 'https://github.com/Aramex86/fsaa-vite',
+        nav: 'Plain React (Vite) ›',
+        note: 'Vite 7 + react-router template',
+        keywords: ['template', 'vite', 'react', 'spa', 'boilerplate', 'starter'],
+      },
+      {
+        id: 'ext-methodology',
+        href: 'https://github.com/Aramex86/fsaa',
+        nav: 'Methodology repo ›',
+        note: 'README, contributing, placement issues',
+        keywords: ['repo', 'github', 'methodology', 'source'],
+      },
+    ],
+  },
+];

@@ -4,9 +4,9 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/shared/lib/cn';
-import { NAV_SECTIONS, getPageNumber } from '@/entities/docs-page';
+import { NAV_SECTIONS, NAV_EXT_SECTIONS, getPageNumber } from '@/entities/docs-page';
 import { filterNav } from '../model/filterNav';
-import type { NavSection } from '@/entities/docs-page';
+import type { NavSection, NavExtSection } from '@/entities/docs-page';
 
 /* Presentational — the ☰ button, shown ≤900px. */
 
@@ -29,12 +29,13 @@ const SEARCH_ICON = (
 
 type SidebarNavProps = {
   sections: NavSection[];
+  extSections: NavExtSection[];
   query: string;
   onQueryChange: (q: string) => void;
   open: boolean;
 };
 
-export function SidebarNav({ sections, query, onQueryChange, open }: SidebarNavProps) {
+export function SidebarNav({ sections, extSections, query, onQueryChange, open }: SidebarNavProps) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -53,7 +54,8 @@ export function SidebarNav({ sections, query, onQueryChange, open }: SidebarNavP
     return () => window.removeEventListener('keydown', onKey);
   }, []);
 
-  const empty = sections.length === 0;
+  const filtered = filterNav(sections, extSections, query);
+  const empty = filtered.sections.length === 0 && filtered.extSections.length === 0;
 
   return (
     <aside className={cn('sidebar', open && 'open')} aria-label="Documentation navigation">
@@ -74,17 +76,38 @@ export function SidebarNav({ sections, query, onQueryChange, open }: SidebarNavP
       {empty ? (
         <p className="nav-empty">No page matches “{query}”.</p>
       ) : (
-        sections.map((section) => (
-          <div className="navgroup" key={section.group}>
-            <h5>{section.group}</h5>
-            {section.pages.map((page) => (
-              <Link key={page.id} href={page.slug} className="navlink">
-                <span className="n">{getPageNumber(page.id)}</span>
-                {page.nav}
-              </Link>
-            ))}
-          </div>
-        ))
+        <>
+          {filtered.sections.map((section) => (
+            <div className="navgroup" key={section.group}>
+              <h5>{section.group}</h5>
+              {section.pages.map((page) => (
+                <Link key={page.id} href={page.slug} className="navlink">
+                  <span className="n">{getPageNumber(page.id)}</span>
+                  {page.nav}
+                </Link>
+              ))}
+            </div>
+          ))}
+
+          {filtered.extSections.map((section) => (
+            <div className="navgroup" key={section.group}>
+              <h5>{section.group}</h5>
+              {section.links.map((link) => (
+                <a
+                  key={link.id}
+                  href={link.href}
+                  className="navlink nav-ext"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title={link.note}
+                >
+                  <span className="n">↗</span>
+                  {link.nav}
+                </a>
+              ))}
+            </div>
+          ))}
+        </>
       )}
 
       <div className="side-note">
@@ -114,7 +137,13 @@ export function DocsSidebar() {
         onClick={() => setOpen(false)}
         aria-hidden={!open}
       />
-      <SidebarNav sections={filterNav(NAV_SECTIONS, query)} query={query} onQueryChange={setQuery} open={open} />
+      <SidebarNav
+        sections={NAV_SECTIONS}
+        extSections={NAV_EXT_SECTIONS}
+        query={query}
+        onQueryChange={setQuery}
+        open={open}
+      />
     </>
   );
 }

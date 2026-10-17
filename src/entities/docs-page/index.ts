@@ -1,8 +1,9 @@
 /* Public API of the docs-page entity. */
 export {
   NAV_GROUPS,
-  DOCS_PAGES,
   NAV_SECTIONS,
+  NAV_EXT_SECTIONS,
+  DOCS_PAGES,
   isDocsPageId,
   getDocsPage,
   getPageNumber,
@@ -11,7 +12,9 @@ export {
 } from './model/registry';
 export type {
   DocsPageId,
-  NavGroup,
   DocsPage,
+  NavGroup,
   NavSection,
+  NavExtSection,
+  NavExtLink,
 } from './model/types';

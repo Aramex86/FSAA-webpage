@@ -644,3 +644,6 @@ pre.mini .a { color: #e0c96a; }
   .layer { grid-template-columns: 22px 72px 1fr; }
   .layer .im { grid-column: 2 / -1; text-align: left; white-space: normal; }
 }
+/* External nav links (Templates, methodology repo) — visual distinction from doc pages */
+.navlink.nav-ext .n { color: var(--accent-2); }
+.navlink.nav-ext:hover { border-color: var(--line); }
