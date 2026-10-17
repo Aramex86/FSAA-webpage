@@ -34,6 +34,8 @@
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--line);
+  /* scroll-margin anchors must always clear this bar (see tokens h2/h3) */
+  transform: translateZ(0); /* keep sticky compositing on Safari/GH Safari quirk */
 }
 .brand { display: flex; align-items: center; gap: 11px; color: var(--text); }
 .brand:hover { text-decoration: none; }
@@ -644,6 +646,23 @@ pre.mini .a { color: #e0c96a; }
   .layer { grid-template-columns: 22px 72px 1fr; }
   .layer .im { grid-column: 2 / -1; text-align: left; white-space: normal; }
 }
-/* External nav links (Templates, methodology repo) — visual distinction from doc pages */
-.navlink.nav-ext .n { color: var(--accent-2); }
-.navlink.nav-ext:hover { border-color: var(--line); }
+/* ---------- qa page ---------- */
+.qa { margin: 0 0 34px; }
+.qa-q {
+  display: flex; align-items: baseline; gap: 12px;
+  font-size: 19px; letter-spacing: -0.2px; font-weight: 700;
+  margin: 0 0 12px; padding-bottom: 9px;
+  border-bottom: 1px solid var(--line-soft);
+}
+.qa-mark {
+  font-family: var(--mono); font-size: 13px; font-weight: 700;
+  color: var(--accent);
+  border: 1px solid rgba(67, 224, 189, 0.4);
+  background: rgba(67, 224, 189, 0.06);
+  border-radius: 8px; padding: 2px 8px;
+  flex: none; transform: translateY(-2px);
+}
+.qa-a { padding-left: 2px; }
+.qa-a p { color: var(--dim); }
+.qa-a strong { color: var(--text); }
+.qa .callout { margin-top: 12px; }

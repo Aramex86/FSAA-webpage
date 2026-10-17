@@ -7,6 +7,7 @@ export type DocsPageId =
   | 'example'
   | 'comparison'
   | 'adoption'
+  | 'qa'
   | 'roadmap';
 
 export type NavGroup = 'Overview' | 'Core rules' | 'In practice' | 'Context';

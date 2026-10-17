@@ -57,8 +57,10 @@ code, kbd, pre { font-family: var(--mono); }
 article { max-width: 840px; }
 
 h1 { font-size: clamp(28px, 3.6vw, 40px); line-height: 1.14; letter-spacing: -0.9px; margin: 0 0 12px; font-weight: 800; }
-h2 { font-size: 21px; letter-spacing: -0.3px; margin: 44px 0 14px; font-weight: 700; padding-bottom: 9px; border-bottom: 1px solid var(--line-soft); scroll-margin-top: 84px; }
-h3 { font-size: 16px; margin: 28px 0 10px; font-weight: 650; scroll-margin-top: 84px; }
+h2 { font-size: 21px; letter-spacing: -0.3px; margin: 44px 0 14px; font-weight: 700; padding-bottom: 9px; border-bottom: 1px solid var(--line-soft); scroll-margin-top: calc(var(--topbar) + 26px); }
+h3 { font-size: 16px; margin: 28px 0 10px; font-weight: 650; scroll-margin-top: calc(var(--topbar) + 26px); }
+/* any anchor target inside article clears the sticky topbar */
+[id] { scroll-margin-top: calc(var(--topbar) + 26px); }
 h4 { margin: 0 0 8px; font-size: 15px; font-weight: 680; }
 p { margin: 0 0 14px; color: var(--dim); }
 strong { color: var(--text); font-weight: 650; }

@@ -52,6 +52,14 @@ export const DOCS_PAGES: DocsPage[] = [
     keywords: ['adoption', 'migration', 'checklist', 'review', 'enforcement'],
   },
   {
+    id: 'qa',
+    slug: '/qa',
+    group: 'Context',
+    title: 'Q&A — hard questions, straight answers',
+    nav: 'Q&A',
+    keywords: ['qa', 'questions', 'answers', 'critique', 'skeptics', 'review', 'maintainer', 'risk'],
+  },
+  {
     id: 'roadmap',
     slug: '/roadmap',
     group: 'Context',
