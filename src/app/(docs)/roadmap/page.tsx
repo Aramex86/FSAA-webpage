@@ -5,7 +5,7 @@ import { DocsPager } from "@/features/docs-pager";
 import { RepoCta } from "@/features/repo-cta";
 import { SITE } from "@/shared/config/site";
 import { crumbFor } from "@/features/docs-registry";
-import { docPageMetadata } from '@/shared/config/site';
+import { docPageMetadata } from "@/shared/config/site";
 
 type Phase = {
   id: string;
@@ -38,15 +38,15 @@ const PHASES: Phase[] = [
     title: "Boilerplate — Next.js + Vite templates",
     detail:
       "fsaa-react repo: Next.js 15 App Router template (main) + plain-React Vite template (template/vite branch). Same layers, same ESLint-enforced boundaries, Projects/Orders example inside both.",
-    status: "In progress",
+    status: "Done",
   },
   {
     id: "phase-3",
     label: "Phase 3",
     title: "CLI — npx fsaa init",
     detail:
-      "Scaffold command asks next/vite, generates the layer structure; slice generator (fsaa g feature <name>); standalone lint checker.",
-    status: "Planned",
+      "Scaffold (npx fsaa init), slice generator (fsaa g), standalone eslint-plugin-fsaa — plus an agent skill that teaches AI coding agents where UI goes, and fsaa audit for boundary drift in existing codebases.",
+    status: "In progress",
   },
   {
     id: "phase-4",
@@ -95,10 +95,10 @@ const gapColumns: Column<GapRow>[] = [
 ];
 
 export const metadata = docPageMetadata({
-  title: 'FSAA roadmap: boilerplate, CLI, lint checker',
+  title: "FSAA roadmap: boilerplate, CLI, lint checker",
   description:
-    'FSAA roadmap: what lands next — starter boilerplate, CLI scaffold, lint checker for layer boundaries, and the stable v0.1 spec of the methodology.',
-  slug: '/roadmap',
+    "FSAA roadmap: what lands next — starter boilerplate, CLI scaffold, lint checker for layer boundaries, and the stable v0.1 spec of the methodology.",
+  slug: "/roadmap",
 });
 
 export default function RoadmapPage() {

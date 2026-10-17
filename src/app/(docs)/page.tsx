@@ -1,24 +1,27 @@
-import { Button, Chip } from '@/shared/ui/atoms';
-import { Callout, Card, PageHeader, ProofBadge } from '@/shared/ui/molecules';
-import { CodeViewer } from '@/features/code-viewer';
-import { LayerStackExplorer } from '@/features/layer-stack-explorer';
-import { DocsPager } from '@/features/docs-pager';
-import { RepoCta } from '@/features/repo-cta';
-import { SITE, docPageMetadata } from '@/shared/config/site';
-import { crumbFor } from '@/features/docs-registry';
+import { Button, Chip } from "@/shared/ui/atoms";
+import { Callout, Card, PageHeader, ProofBadge } from "@/shared/ui/molecules";
+import { CodeViewer } from "@/features/code-viewer";
+import { LayerStackExplorer } from "@/features/layer-stack-explorer";
+import { DocsPager } from "@/features/docs-pager";
+import { RepoCta } from "@/features/repo-cta";
+import { SITE, docPageMetadata } from "@/shared/config/site";
+import { crumbFor } from "@/features/docs-registry";
 
 export const metadata = docPageMetadata({
-  absoluteTitle: 'FSAA — Where does UI go? FSD + Atomic Design unified',
-  title: 'FSAA — Feature-Sliced Atomic Architecture',
+  absoluteTitle: "FSAA — Where does UI go? FSD + Atomic Design unified",
+  title: "FSAA — Feature-Sliced Atomic Architecture",
   description:
-    'FSAA unifies Feature-Sliced Design and Atomic Design and answers the question both leave open: where does UI go? Decision rules, layers, graduation pattern.',
-  slug: '/',
+    "FSAA unifies Feature-Sliced Design and Atomic Design and answers the question both leave open: where does UI go? Decision rules, layers, graduation pattern.",
+  slug: "/",
 });
 
 export default function HomePage() {
   return (
     <>
-      <PageHeader crumb={crumbFor('home')} title={`${SITE.name} — ${SITE.fullName}`} />
+      <PageHeader
+        crumb={crumbFor("home")}
+        title={`${SITE.name} — ${SITE.fullName}`}
+      />
 
       <div className="chips">
         <Chip tone="on">Open source</Chip>
@@ -28,8 +31,8 @@ export default function HomePage() {
       </div>
 
       <p className="pitch">
-        FSAA is FSD + Atomic Design with an answer to the question both leave open:{' '}
-        <strong>where does UI go?</strong>
+        FSAA is FSD + Atomic Design with an answer to the question both leave
+        open: <strong>where does UI go?</strong>
       </p>
 
       <div className="cta">
@@ -42,24 +45,26 @@ export default function HomePage() {
 
       <h2 id="layer-stack">The layer stack</h2>
       <p>
-        Five layers. Imports flow down, never up, never skip. Click or hover a layer to see its
-        allowed and forbidden imports.
+        Five layers. Imports flow down, never up, never skip. Click or hover a
+        layer to see its allowed and forbidden imports.
       </p>
       <LayerStackExplorer />
 
       <h2 id="three-things">Three things FSAA adds</h2>
       <div className="cards">
         <Card num="01" title="The graduation pattern">
-          Feature UI lives flat in features/&lt;name&gt;/ui/. It is promoted to shared/ui only
-          after a second feature actually reuses it.
+          Feature UI lives flat in features/&lt;name&gt;/ui/. It is promoted to
+          shared/ui only after a second feature actually reuses it.
         </Card>
         <Card num="02" title="The boundary test">
-          One question decides shared vs feature: could the component be described without
-          business vocabulary? Generic DataTable passes; projectColumns does not.
+          One question decides shared vs feature: could the component be
+          described without business vocabulary? Generic DataTable passes;
+          projectColumns does not.
         </Card>
         <Card num="03" title="No widgets layer">
-          Large compositions are features, not a UI level. Container/presentational split
-          happens at the export level, not in the filesystem.
+          Large compositions are features, not a UI level.
+          Container/presentational split happens at the export level, not in the
+          filesystem.
         </Card>
       </div>
 
@@ -71,11 +76,12 @@ export default function HomePage() {
 
       <h2 id="nextjs">FSAA plays natively with Next.js App Router</h2>
       <p>
-        FSD in Next.js collides with the router: <code>app/</code> is taken, so teams rename
-        layers to <code>_app</code>/<code>_pages</code>. FSAA needs none of that —{' '}
-        <strong>the App Router itself is the pages layer</strong>. Route files stay thin
-        (import → render), and layouts, <code>loading.tsx</code>/<code>error.tsx</code>, route
-        groups and parallel-route slots are composition-layer concerns: a slot references a
+        FSD in Next.js collides with the router: <code>app/</code> is taken, so
+        teams rename layers to <code>_app</code>/<code>_pages</code>. FSAA needs
+        none of that — <strong>the App Router itself is the pages layer</strong>
+        . Route files stay thin (import → render), and layouts,{" "}
+        <code>loading.tsx</code>/<code>error.tsx</code>, route groups and
+        parallel-route slots are composition-layer concerns: a slot references a
         feature, it never implements one.
       </p>
       <CodeViewer
@@ -89,9 +95,9 @@ export default function ProjectsPage() {
 }`}
       />
       <p>
-        The same layers and the same ESLint boundaries ship for plain React (Vite 7 +
-        react-router) in a second template — one methodology, two runtimes, no{' '}
-        <code>_app</code>/<code>_pages</code> prefixes anywhere.
+        The same layers and the same ESLint boundaries ship for plain React
+        (Vite 7 + react-router) in a second template — one methodology, two
+        runtimes, no <code>_app</code>/<code>_pages</code> prefixes anywhere.
       </p>
 
       <h2 id="where-to-start">Where to start</h2>
@@ -103,8 +109,8 @@ export default function ProjectsPage() {
           Projects/Orders case study: one generic table, two business features.
         </Card>
         <Card title="Compare the methods">
-          FSAA vs FSD vs Atomic Design vs Bulletproof React — including “isn’t this just a
-          hybrid?”
+          FSAA vs FSD vs Atomic Design vs Bulletproof React — including “isn’t
+          this just a hybrid?”
         </Card>
       </div>
 
