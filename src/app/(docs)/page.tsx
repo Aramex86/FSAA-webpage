@@ -1,5 +1,6 @@
 import { Button, Chip } from '@/shared/ui/atoms';
 import { Callout, Card, PageHeader, ProofBadge } from '@/shared/ui/molecules';
+import { CodeViewer } from '@/features/code-viewer';
 import { LayerStackExplorer } from '@/features/layer-stack-explorer';
 import { DocsPager } from '@/features/docs-pager';
 import { RepoCta } from '@/features/repo-cta';
@@ -67,6 +68,31 @@ export default function HomePage() {
         “{SITE.positioning}”
       </Callout>
       <ProofBadge>{SITE.proof}</ProofBadge>
+
+      <h2 id="nextjs">FSAA plays natively with Next.js App Router</h2>
+      <p>
+        FSD in Next.js collides with the router: <code>app/</code> is taken, so teams rename
+        layers to <code>_app</code>/<code>_pages</code>. FSAA needs none of that —{' '}
+        <strong>the App Router itself is the pages layer</strong>. Route files stay thin
+        (import → render), and layouts, <code>loading.tsx</code>/<code>error.tsx</code>, route
+        groups and parallel-route slots are composition-layer concerns: a slot references a
+        feature, it never implements one.
+      </p>
+      <CodeViewer
+        file="app/projects/page.tsx"
+        lang="ts"
+        code={`// thin route — this IS the FSAA page composition
+import { ProjectsOverview } from '@/features/projects-overview';
+
+export default function ProjectsPage() {
+  return <ProjectsOverview />;
+}`}
+      />
+      <p>
+        The same layers and the same ESLint boundaries ship for plain React (Vite 7 +
+        react-router) in a second template — one methodology, two runtimes, no{' '}
+        <code>_app</code>/<code>_pages</code> prefixes anywhere.
+      </p>
 
       <h2 id="where-to-start">Where to start</h2>
       <div className="cards">

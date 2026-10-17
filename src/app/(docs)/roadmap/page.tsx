@@ -27,22 +27,30 @@ const PHASES: Phase[] = [
   {
     id: "phase-1",
     label: "Phase 1",
-    title: "Reference repository",
+    title: "Reference repository + indexation",
     detail:
-      "Public repo with the ESLint boundary config, a starter template and examples.",
+      "Public methodology repo (fsaa) with honest README + CONTRIBUTING; docs site indexed (robots, sitemap, GSC).",
     status: "Done",
   },
   {
     id: "phase-2",
     label: "Phase 2",
-    title: "Codemods for migration",
+    title: "Boilerplate — Next.js + Vite templates",
     detail:
-      "Scripts that scaffold slices and rewrite imports per the migration notes.",
-    status: "Planned",
+      "fsaa-react repo: Next.js 15 App Router template (main) + plain-React Vite template (template/vite branch). Same layers, same ESLint-enforced boundaries, Projects/Orders example inside both.",
+    status: "In progress",
   },
   {
     id: "phase-3",
     label: "Phase 3",
+    title: "CLI — npx fsaa init",
+    detail:
+      "Scaffold command asks next/vite, generates the layer structure; slice generator (fsaa g feature <name>); standalone lint checker.",
+    status: "Planned",
+  },
+  {
+    id: "phase-4",
+    label: "Phase 4",
     title: "Community feedback loop",
     detail: "Case studies from adopters; rules only change with evidence.",
     status: "Planned",
@@ -57,9 +65,9 @@ type GapRow = {
 
 const GAP_ROWS: GapRow[] = [
   {
-    id: "repo",
-    gap: "No public repository yet — GitHub links are placeholders by design.",
-    plan: "Phase 1: reference repo + starter template.",
+    id: "templates",
+    gap: "Boilerplate ships as a Git template (clone-and-rename), not an npm CLI yet.",
+    plan: "Phase 3: npx fsaa init (asks next/vite) + slice generator.",
   },
   {
     id: "ssr-recipes",
@@ -68,13 +76,13 @@ const GAP_ROWS: GapRow[] = [
   },
   {
     id: "tooling",
-    gap: "No codemods yet; migration is manual (and lint-guarded).",
-    plan: "Phase 2: slice scaffolding + import rewrites.",
+    gap: "Slice scaffolding is manual; boundaries enforced by bundled ESLint config.",
+    plan: "Phase 3: slice generator + standalone eslint-plugin-fsaa.",
   },
   {
     id: "cases",
     gap: "One production case study (internal tool); more needed.",
-    plan: "Phase 3: adopter case studies on this site.",
+    plan: "Phase 4: adopter case studies on this site.",
   },
 ];
 
