@@ -44,10 +44,13 @@ export const QA_ITEMS: QAItem[] = [
     id: 'graduation-who',
     question: '“The graduation pattern: who decides, and what stops copy-paste drift?”',
     answer: [
-      'The trigger is objective, not a feeling: a component is needed by a <strong>second independent feature</strong>. The first duplicate is legal — it is a signal, not a catastrophe. Promotion requires the boundary test to pass, then the move happens in <strong>one PR</strong>: the component lands in shared/ui as a molecule, the old feature imports it via the public index, and the previous path dies inside that same changeset.',
-      'What stops drift mechanically: cross-feature imports are a lint error, so a copy-pasted component fails CI — the second copy either graduates or gets replaced by an import from the first.',
+      'Told as a story, because the mechanics are simple:',
+      'Week 1 — <code>ProjectCard</code> lives inside <code>features/projects-overview/ui/</code>. Normal: every feature owns its UI.',
+      'Week 3 — the orders feature needs a similar card. It <strong>cannot import</strong> it from projects (cross-feature imports are a lint error). So the developer copies the file into <code>features/orders-overview/ui/</code>. <strong>The copy is legal</strong> — one duplicate is allowed on purpose: a real second user just appeared, and that fact is now visible in the codebase.',
+      'Week 4+ — the two cards keep evolving in parallel. If they end up the same anyway, that is proof the component is genuinely shared. Now <strong>one pull request</strong> graduates it: <code>ProjectCard</code> moves to <code>shared/ui/molecules/</code>, BOTH features import it from the shared public API (the folder’s <code>index.ts</code>), and the two feature-local copies are deleted inside that same PR. CI plus lint verify nothing still points at the deleted paths.',
+      'Nobody “feels” anything: the trigger is the second feature (objective), the gate is the boundary test, the move is a single PR. Drift cannot hide — a third copy fails CI on arrival, because the only legal cross-feature sources are entities (data) and shared (UI).',
     ],
-    take: 'Trigger: second feature. Gate: boundary test. Move: one PR, old import dies in it.',
+    take: 'Second feature = trigger. Boundary test = gate. One PR = the move, with the old copies deleted inside it.',
   },
   {
     id: 'nextjs-placement',
