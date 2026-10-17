@@ -1,16 +1,18 @@
 name: Deploy docs to Pages
 
-# Триггеры: merge в main = деплой; ручной запуск для тестов
+# Deploy rules (PR-RULES.md): production updates ONLY after merge into main.
+# Push to PR branches never triggers this workflow.
+
 on:
   push:
     branches: [main]
-  workflow_dispatch: {} # кнопка "Run workflow" в Actions — для первого прогона
+  workflow_dispatch: {}   # manual "Run workflow" button — for smoke tests
 
 permissions:
-  contents: write # право коммитить (нужен peaceiris)
+  contents: write         # peaceiris needs to commit to the target repo
 
 concurrency:
-  group: gh-pages-deploy # два merge подряд → не конфликтуют, второй ждёт
+  group: gh-pages-deploy  # two merges back-to-back: second waits, no race
   cancel-in-progress: false
 
 jobs:
@@ -21,19 +23,23 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 22 # тот же Node, что у тебя локально
-          cache: npm # кэш node_modules → сборка ~40 с вместо ~2 мин
+          node-version: 22   # same major as local dev
+          cache: npm
 
-      - run: npm ci
-      - run: npm run build # output: 'export' → ./out (next.config.mjs делает всю магию basePath)
+      - name: Install deps
+        run: npm ci
 
-      - uses: peaceiris/actions-gh-pages@v4
+      - name: Build static export
+        run: npm run build   # output: 'export' -> ./out (basePath /fsaa in next.config.mjs)
+
+      - name: Publish to fsaa gh-pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          external_repository: Aramex86/fsaa # прод-репо (ветка gh-pages)
+          external_repository: Aramex86/fsaa      # production repo (Pages source: gh-pages branch, root)
           publish_branch: gh-pages
           publish_dir: ./out
-          personal_token: ${{ secrets.DEPLOY_PAT }}
-          enable_nojekyll: true # создаст .nojekyll — как у нас сейчас руками
-          commit_message: "docs: auto-deploy from ${{ github.repository }}@${{ github.sha }}"
+          personal_token: ${{ secrets.DEPLOY_PAT }}  # classic PAT with repo scope
+          enable_nojekyll: true
+          commit_message: "docs: auto-deploy from FSAA-webpage@${{ github.sha }}"
           user_name: github-actions[bot]
           user_email: github-actions[bot]@users.noreply.github.com
