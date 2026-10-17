@@ -1,16 +1,23 @@
-import type { MetadataRoute } from 'next';
-import { docsSitemapEntries } from '@/features/docs-urls';
+import type { MetadataRoute } from "next";
+import { docsSitemapEntries } from "@/features/docs-urls";
 
-/* app/sitemap — one entry per documented page (Phase 1.5).
-   Slugs come through features/docs-urls (entities registry wrapped for the app layer).
-   force-static: required by output: 'export'. */
-export const dynamic = 'force-static';
+export const dynamic = "force-static";
+
+// Укажите точный адрес вашего сайта на GitHub Pages
+const BASE_URL = "https://aramex86.github.io/fsaa";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return docsSitemapEntries().map((e) => ({
-    url: e.url,
-    lastModified: new Date(),
-    changeFrequency: e.changeFrequency,
-    priority: e.priority,
-  }));
+  return docsSitemapEntries().map((e) => {
+    // Если URL уже абсолютный, оставляем как есть. Иначе добавляем BASE_URL.
+    const absoluteUrl = e.url.startsWith("http")
+      ? e.url
+      : `${BASE_URL}${e.url.startsWith("/") ? e.url : `/${e.url}`}`;
+
+    return {
+      url: absoluteUrl,
+      lastModified: new Date(),
+      changeFrequency: e.changeFrequency,
+      priority: e.priority,
+    };
+  });
 }

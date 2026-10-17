@@ -1,6 +1,6 @@
-import Link from 'next/link';
-import { Pill } from '@/shared/ui/atoms';
-import { SITE } from '@/shared/config/site';
+import Link from "next/link";
+import { Pill } from "@/shared/ui/atoms";
+import { SITE } from "@/shared/config/site";
 
 /* Feature site-header — sticky topbar with brand + status pills. */
 
@@ -25,7 +25,12 @@ export function SiteHeader() {
           {SITE.phaseLabel}
         </Pill>
         {SITE.repoUrl ? (
-          <a href={SITE.repoUrl} target="_blank" rel="noreferrer" className="pill live hide-sm">
+          <a
+            href={SITE.repoUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="pill live hide-sm"
+          >
             {SITE.repoLabel}
           </a>
         ) : (
