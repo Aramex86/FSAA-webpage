@@ -1052,9 +1052,12 @@ pre.mini .a {
   &::-webkit-scrollbar {
     width: 10px;
   }
+  &::-webkit-scrollbar-track {
+    background: var(--panel);
+  }
   &::-webkit-scrollbar-thumb {
     background: var(--line);
-    border-radius: 3px;
+    border-radius: 5px;
   }
 }
 .search {
