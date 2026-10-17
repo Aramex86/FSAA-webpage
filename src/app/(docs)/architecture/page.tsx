@@ -93,6 +93,39 @@ export default function ArchitecturePage() {
         barrel at the folder root, no cross-imports between molecule folders.
       </Callout>
 
+      <h2 id="nextjs">FSAA in Next.js App Router</h2>
+      <p>
+        Next.js collides with FSD&apos;s layer names: its <code>app/</code> folder is the router, and{' '}
+        <code>pages/</code> is the legacy Pages Router — so FSD teams rename layers to{' '}
+        <code>_app</code>/<code>_pages</code>. FSAA removes the collision instead of renaming:{' '}
+        <strong>the App Router itself is the pages layer</strong>.
+      </p>
+      <CodeViewer
+        file="structure (Next.js template)"
+        lang="tree"
+        code={`src/
+  features/    # user scenarios incl. large page-level blocks
+  entities/    # business models + data access
+  shared/      # tokens, atoms/molecules, utilities
+app/
+  layout.tsx            # app layer: providers, global config
+  projects/page.tsx     # thin route = the page composition`}
+      />
+      <p>
+        Route files stay thin (import → render → <code>Suspense</code>) — that thinness IS the
+        page composition. Everything on the routes is a composition-layer concern:
+      </p>
+      <ol>
+        <li><strong><code>layout.tsx</code></strong> — root layout is the FSAA app layer (providers); section layouts are page-level compositions</li>
+        <li><strong><code>loading.tsx</code> / <code>error.tsx</code></strong> — Suspense/error wrappers around compositions; pages-layer, never features</li>
+        <li><strong>Route groups <code>(marketing)</code></strong> — allowed: pages grouped by scenario, as long as import directions stay intact</li>
+        <li><strong>Parallel routes <code>@slot</code></strong> — a slot references a feature; it never implements one itself</li>
+      </ol>
+      <Callout tone="rule" label="Rule">
+        Business logic never enters app/ route files. If a route file grows beyond import →
+        render → wrapper, the content belongs in a feature.
+      </Callout>
+
       <DocsPager current="architecture" />
     </>
   );
