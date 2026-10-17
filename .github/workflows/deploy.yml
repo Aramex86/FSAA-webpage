@@ -1,0 +1,45 @@
+name: Deploy docs to Pages
+
+# Deploy rules (PR-RULES.md): production updates ONLY after merge into main.
+# Push to PR branches never triggers this workflow.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}   # manual "Run workflow" button — for smoke tests
+
+permissions:
+  contents: write         # peaceiris needs to commit to the target repo
+
+concurrency:
+  group: gh-pages-deploy  # two merges back-to-back: second waits, no race
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22   # same major as local dev
+          cache: npm
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Build static export
+        run: npm run build   # output: 'export' -> ./out (basePath /fsaa in next.config.mjs)
+
+      - name: Publish to fsaa gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          external_repository: Aramex86/fsaa      # production repo (Pages source: gh-pages branch, root)
+          publish_branch: gh-pages
+          publish_dir: ./out
+          personal_token: ${{ secrets.DEPLOY_PAT }}  # classic PAT with repo scope
+          enable_nojekyll: true
+          commit_message: "docs: auto-deploy from FSAA-webpage@${{ github.sha }}"
+          user_name: github-actions[bot]
+          user_email: github-actions[bot]@users.noreply.github.com
