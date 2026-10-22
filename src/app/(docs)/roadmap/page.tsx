@@ -37,7 +37,7 @@ const PHASES: Phase[] = [
     label: "Phase 2",
     title: "Boilerplate — Next.js + Vite templates",
     detail:
-      "fsaa-react repo: Next.js 15 App Router template (main) + plain-React Vite template (template/vite branch). Same layers, same ESLint-enforced boundaries, Projects/Orders example inside both.",
+      "fsaa-next (Next.js 15 App Router) + fsaa-vite (Vite 7 + react-router) — two template repos. Same layers, AGENTS.md drift-check, ESLint-enforced boundaries, Projects/Orders example inside both.",
     status: "Done",
   },
   {

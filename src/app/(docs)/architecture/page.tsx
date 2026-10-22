@@ -7,10 +7,12 @@ import { importRules, LayerTable } from '@/features/layer-stack';
 import { docPageMetadata } from '@/shared/config/site';
 
 const ENTITY_API = `// entities/account/index.ts — public API of an entity
-export { type Account, createEmptyAccount } from './model/types';
-export { useAccounts, accountApi } from './model/accounts';
+export { type Account, createAccount, getAccounts } from './account';
 
-// Everything else (internal files) is import-forbidden outside the entity.`;
+// account.ts holds the type + data access: ALL business logic lives inside
+// entities — features never contain api/model/types of their own. When the
+// entity grows it splits into api/ / types/ / slice/ parts, still within the
+// entity. Everything not re-exported from index.ts is import-forbidden outside.`;
 
 const LINT_INTENT = `// lint intent — boundaries as compiler errors, not review comments
 import/no-restricted-paths: [

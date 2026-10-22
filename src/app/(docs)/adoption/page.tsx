@@ -67,12 +67,14 @@ export default function AdoptionPage() {
           mechanically.
         </li>
         <li>
-          <b>Slice the biggest page blocks into features.</b> One block per PR, ui/model/api only
-          when each part exists.
+          <b>Slice the biggest page blocks into features.</b> One block per PR:
+          index.ts (public API) + ui/ + config/ (+ __tests__/) — nothing else
+          inside a feature.
         </li>
         <li>
-          <b>Extract entities with models.</b> Move types + data access that 2+ features need;
-          keep public APIs via index.ts.
+          <b>Extract entities.</b> Move types + data access that 2+ features need — an entity
+          is index.ts + <code>&lt;noun&gt;.ts</code> and may grow api/types/slice parts, still
+          inside the entity; keep public APIs via index.ts.
         </li>
         <li>
           <b>Graduate UI last.</b> Only after step 5 do you have consumers to justify shared/ui

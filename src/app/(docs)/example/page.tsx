@@ -6,33 +6,30 @@ import { SITE, docPageMetadata } from '@/shared/config/site';
 import { crumbFor } from '@/features/docs-registry';
 
 const TREE = `src/
-├─ app/                    // routing + global layout
-│  └─ layout.tsx
-├─ pages/                  // route-level composition
-│  └─ accounting/
-│     ├─ index.ts
-│     └─ AccountingPage.tsx
 ├─ features/
 │  ├─ accounting-columns/  // business configuration for the table
 │  │  ├─ index.ts
-│  │  └─ ui/projectColumns.tsx
-│  └─ accounting-table/    // page block: ui + model + api
+│  │  ├─ config/           // columns — plain data, testable
+│  │  │  ├─ projectColumns.tsx
+│  │  │  └─ overviewColumns.tsx
+│  │  ├─ ui/               // slice components (no fetch, no business logic)
+│  │  └─ __tests__/        // logic-level tests — never empty on commit
+│  └─ accounting-table/    // page block: composition of the generic table
 │     ├─ index.ts
-│     ├─ ui/AccountingTable.tsx
-│     ├─ model/selectors.ts
-│     └─ api/accountsApi.ts
+│     └─ ui/AccountingTable.tsx
 ├─ entities/
 │  ├─ account/
 │  │  ├─ index.ts
-│  │  ├─ model/types.ts
-│  │  └─ model/accounts.ts
+│  │  └─ account.ts        // type + data access — ALL business logic lives here
 │  └─ posting/
 │     ├─ index.ts
-│     └─ model/types.ts
+│     └─ posting.ts        // may grow api/ types/ slice/ parts when needed
 └─ shared/
    ├─ ui/molecules/table/  // generic DataTable (graduated)
-   ├─ config/              // design tokens config
-   └─ lib/                 // cn(), formatting utils`;
+   └─ config/              // design tokens config
+app/
+├─ layout.tsx              // shell only — root layout
+└─ accounting/page.tsx     // thin route: import → render → Suspense`;
 
 const DATATABLE = `// shared/ui/molecules/table — generic, domain-free
 export type Column<T> = {
@@ -50,8 +47,8 @@ export function DataTable<T>(props: {
   // one generic table for the whole app — used by 2 pages + 1 feature
 }`;
 
-const PROJECT_COLUMNS = `// features/accounting-columns/ui/projectColumns.tsx
-// FEATURE = business configuration. It knows Account, Posting, money.
+const PROJECT_COLUMNS = `// features/accounting-columns/config/projectColumns.tsx
+// FEATURE CONFIG = business configuration. It knows Account, Posting, money.
 import { DataTable } from '@/shared/ui/molecules';
 
 export const projectColumns: Column<AccountRow>[] = [
@@ -60,23 +57,25 @@ export const projectColumns: Column<AccountRow>[] = [
   { header: 'Amount',  render: (r) => formatMoney(r.amount) },
 ];`;
 
-const OVERVIEW = `// features/accounting-columns — same generic columns, overview variant
+const OVERVIEW = `// features/accounting-columns/config/overviewColumns.tsx — overview variant
 export const overviewColumns: Column<AccountRow>[] = [
   { header: 'Account', render: (r) => r.code },
   { header: 'Total',   render: (r) => formatMoney(r.sum) },
 ];`;
 
-const FEATURE_API = `// features/accounting-table — page block owning data + composition
+const FEATURE_API = `// features/accounting-table — page block, composition only
 export { AccountingTable } from './ui/AccountingTable';
 
 // ui/AccountingTable.tsx picks WHICH column set to render:
 //   <DataTable columns={props.mode === 'overview' ? overviewColumns : projectColumns} />
-// The project never configures its own columns.`;
+// Business logic and data access live in entities — this feature is pure composition.`;
 
-const PAGE = `// pages/accounting/AccountingPage.tsx — composition only
+const PAGE = `// app/accounting/page.tsx — thin route: import → render → Suspense
 import { AccountingTable } from '@/features/accounting-table';
 
-export function AccountingPage() {
+export const metadata = { title: 'Accounting' };
+
+export default function AccountingPage() {
   return (
     <>
       <h1>Accounting</h1>
@@ -93,9 +92,9 @@ type TraceRow = {
 };
 
 const TRACE_ROWS: TraceRow[] = [
-  { id: 'page', step: '01', unit: 'pages/accounting', imports: 'features/accounting-table' },
+  { id: 'page', step: '01', unit: 'app/accounting/page.tsx', imports: 'features/accounting-table (public API)' },
   { id: 'feature', step: '02', unit: 'features/accounting-table', imports: 'features/accounting-columns (public API), shared/ui/molecules' },
-  { id: 'config', step: '03', unit: 'features/accounting-columns', imports: 'shared/ui/molecules (Column type)' },
+  { id: 'config', step: '03', unit: 'features/accounting-columns/config', imports: 'shared/ui/molecules (Column type)' },
   { id: 'molecule', step: '04', unit: 'shared/ui/molecules/table', imports: 'nothing project-level' },
 ];
 
@@ -108,7 +107,7 @@ const traceColumns: Column<TraceRow>[] = [
 export const metadata = docPageMetadata({
   title: 'Worked example: generic DataTable in shared, business columns in features',
   description:
-    'A Projects/Orders worked example: the table component stays generic in shared, business columns live in features. Step-by-step FSAA trace of an accounting table.',
+    'A worked accounting-table example: the DataTable stays generic in shared, business columns live in feature config, all business logic in entities.',
   slug: '/example',
 });
 
@@ -137,12 +136,12 @@ export default function ExamplePage() {
         Column definitions know money, accounts and periods — that is why they are a feature,
         not a shared molecule.
       </p>
-      <CodeViewer file="features/accounting-columns/ui/projectColumns.tsx" lang="tsx" code={PROJECT_COLUMNS} />
-      <CodeViewer file="features/accounting-columns/ui/overviewColumns.tsx" lang="tsx" code={OVERVIEW} />
+      <CodeViewer file="features/accounting-columns/config/projectColumns.tsx" lang="tsx" code={PROJECT_COLUMNS} />
+      <CodeViewer file="features/accounting-columns/config/overviewColumns.tsx" lang="tsx" code={OVERVIEW} />
       <CodeViewer file="features/accounting-table/index.ts" lang="ts" code={FEATURE_API} />
 
-      <h2 id="pages-composition">pages — route-level composition</h2>
-      <CodeViewer file="pages/accounting/AccountingPage.tsx" lang="tsx" code={PAGE} />
+      <h2 id="pages-composition">app/ — thin route composition</h2>
+      <CodeViewer file="app/accounting/page.tsx" lang="tsx" code={PAGE} />
 
       <h2 id="import-trace">Import trace</h2>
       <DataTable columns={traceColumns} data={TRACE_ROWS} rowKey={(row) => row.id} caption="Who imports whom" />

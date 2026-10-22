@@ -33,7 +33,7 @@ export const CRITERION_ROWS: CriterionRow[] = [
     id: 'business-logic',
     criterion: 'Where business logic lives',
     cells: {
-      fsaa: logicPlacement('features/{name}/model + entities/{name}/model'),
+      fsaa: logicPlacement('entities/{name} — logic + data access; features stay logic-free'),
       fsd: logicPlacement('features/model, entities/model', 'Same idea, stricter segment list'),
       atomic: logicPlacement('container/component split', 'Logic placement drifts by developer'),
       bulletproof: logicPlacement('hooks/, services/, api/', 'Clear but not sliced by domain'),
@@ -43,7 +43,7 @@ export const CRITERION_ROWS: CriterionRow[] = [
     id: 'large-blocks',
     criterion: 'Large page blocks',
     cells: {
-      fsaa: { verdict: 'yes', text: 'features — a block is a feature with ui/model/api' },
+      fsaa: { verdict: 'yes', text: 'features — a block is a feature with index.ts (public API) + ui/ + config/' },
       fsd: { verdict: 'mid', text: 'widgets layer (separate)', note: 'The widgets-vs-feature debate' },
       atomic: { verdict: 'no', text: 'not addressed', note: 'Only organism size hints' },
       bulletproof: { verdict: 'no', text: 'not addressed' },
