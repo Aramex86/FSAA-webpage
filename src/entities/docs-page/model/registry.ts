@@ -117,7 +117,7 @@ export const NAV_EXT_SECTIONS: NavExtSection[] = [
     links: [
       {
         id: 'tpl-next',
-        href: 'https://github.com/Aramex86/fsaa-react',
+        href: 'https://github.com/Aramex86/fsaa-next',
         nav: 'Next.js App Router ›',
         note: 'Next.js 15 + React 19 template',
         keywords: ['template', 'next', 'nextjs', 'app router', 'boilerplate', 'starter'],
