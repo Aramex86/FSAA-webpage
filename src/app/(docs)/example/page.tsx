@@ -19,11 +19,17 @@ const TREE = `src/
 │     └─ ui/AccountingTable.tsx
 ├─ entities/
 │  ├─ account/
-│  │  ├─ index.ts
-│  │  └─ account.ts        // type + data access — ALL business logic lives here
+│  │  ├─ index.ts          // public API — re-exports only
+│  │  ├─ types.ts
+│  │  ├─ api.ts            // data access
+│  │  ├─ slice.ts          // state / business logic
+│  │  └─ __tests__/
 │  └─ posting/
 │     ├─ index.ts
-│     └─ posting.ts        // may grow api.ts / slice.ts / types.ts when needed
+│     ├─ types.ts
+│     ├─ api.ts
+│     ├─ slice.ts
+│     └─ __tests__/
 └─ shared/
    ├─ ui/molecules/table/  // generic DataTable (graduated)
    └─ config/              // design tokens config
