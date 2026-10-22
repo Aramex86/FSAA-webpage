@@ -11,8 +11,9 @@ export { type Account, createAccount, getAccounts } from './account';
 
 // account.ts holds the type + data access: ALL business logic lives inside
 // entities — features never contain api/model/types of their own. When the
-// entity grows it splits into api/ / types/ / slice/ parts, still within the
-// entity. Everything not re-exported from index.ts is import-forbidden outside.`;
+// entity grows it gains sibling files — api.ts, slice.ts, types.ts (+ tests) —
+// flat inside the entity folder, no nested model/. Everything not re-exported
+// from index.ts is import-forbidden outside.`;
 
 const LINT_INTENT = `// lint intent — boundaries as compiler errors, not review comments
 import/no-restricted-paths: [
