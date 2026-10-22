@@ -73,8 +73,9 @@ export default function AdoptionPage() {
         </li>
         <li>
           <b>Extract entities.</b> Move types + data access that 2+ features need — an entity
-          is index.ts + <code>&lt;noun&gt;.ts</code> and may grow api/types/slice parts, still
-          inside the entity; keep public APIs via index.ts.
+          is index.ts + <code>&lt;noun&gt;.ts</code> and grows sibling files (<code>api.ts</code>,{' '}
+          <code>slice.ts</code>, <code>types.ts</code>, tests), still inside the entity folder;
+          keep public APIs via index.ts.
         </li>
         <li>
           <b>Graduate UI last.</b> Only after step 5 do you have consumers to justify shared/ui

@@ -23,7 +23,7 @@ const TREE = `src/
 │  │  └─ account.ts        // type + data access — ALL business logic lives here
 │  └─ posting/
 │     ├─ index.ts
-│     └─ posting.ts        // may grow api/ types/ slice/ parts when needed
+│     └─ posting.ts        // may grow api.ts / slice.ts / types.ts when needed
 └─ shared/
    ├─ ui/molecules/table/  // generic DataTable (graduated)
    └─ config/              // design tokens config
