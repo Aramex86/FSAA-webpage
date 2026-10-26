@@ -20,6 +20,14 @@ export const DOCS_PAGES: DocsPage[] = [
     keywords: ['layers', 'import rules', 'boundaries', 'atomic'],
   },
   {
+    id: 'agentic',
+    slug: '/agentic',
+    group: 'Core rules',
+    title: 'AI agents — the contract, checks and procedures',
+    nav: 'AI agents',
+    keywords: ['agents', 'agentic', 'ai', 'claude', 'cursor', 'contract', 'agents md', 'drift', 'drift check', 'procedures', 'skills'],
+  },
+  {
     id: 'graduation',
     slug: '/graduation',
     group: 'Core rules',
