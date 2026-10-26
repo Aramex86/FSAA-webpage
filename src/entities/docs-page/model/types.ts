@@ -3,6 +3,7 @@
 export type DocsPageId =
   | 'home'
   | 'architecture'
+  | 'agentic'
   | 'graduation'
   | 'example'
   | 'comparison'
