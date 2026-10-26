@@ -45,8 +45,8 @@ export const SITE = {
   name: "FSAA",
   fullName: "Feature-Sliced Atomic Architecture",
   tagline: "Feature-Sliced Atomic",
-  version: "v0.2 draft",
-  phaseLabel: "Phase 1 · docs live",
+  version: "v0.3 draft",
+  phaseLabel: "Phase 3 · agentic live",
   repoUrl: "https://github.com/Aramex86/fsaa", // methodology repo (MIT, public)
   webRepoUrl: "https://github.com/Aramex86/FSAA-webpage", // docs-site source
   repoLabel: "GitHub repository",
