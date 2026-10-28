@@ -114,11 +114,12 @@ export default function AgenticPage() {
       </p>
       <ol>
         <li>
-          Scaffold your app with the CLI — <code>npx github:Aramex86/fsaa init</code> (npm registry
-          package ships next). It downloads a starter, installs deps, and ends with a green
-          drift-check as proof.
+          Scaffold your app with the CLI — <code>npm create fsaa@latest</code> (the <code>create-fsaa</code>
+          npm package; while the registry release is pending:{" "}
+          <code>npx github:Aramex86/fsaa init</code>). It downloads a starter, installs deps,
+          and ends with a green drift-check as proof.
         </li>
-        <li>Generate slices inside the project: <code>npx github:Aramex86/fsaa g &lt;slice-name&gt;</code>.</li>
+        <li>Generate slices inside the project: <code>fsaa g &lt;slice-name&gt;</code> (or <code>npx create-fsaa g …</code>).</li>
         <li>Cold start with <code>agents/run-stack.md</code> — install, dev up, green checks.</li>
         <li>Point your agent (Claude Code, Cursor, …) at <code>AGENTS.md</code> and <code>agents/</code>; keep main protected PR-only — drift-check + lint + tests run on every PR.</li>
       </ol>
