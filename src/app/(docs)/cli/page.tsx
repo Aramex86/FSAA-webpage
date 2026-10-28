@@ -40,7 +40,7 @@ export default function CliPage() {
       <p>
         A real run (captured live, template <code>vite</code>):
       </p>
-      <CodeViewer file="npm create fsaa@latest — a real run" lang="text" code={INIT_GREEN} />
+      <CodeViewer file="npm create fsaa@latest — a real run" lang="text" code={INIT_GREEN} copyText="npm create fsaa@latest" />
 
       <p>
         The final step is the agent contract itself: <code>AGENTS.md</code> is verified against the
@@ -52,7 +52,7 @@ export default function CliPage() {
         Inside a scaffolded project, one command produces the entity + feature pair exactly per{' '}
         <code>agents/add-module.md</code>: index, types, api, slice, tests — and the thin route file:
       </p>
-      <CodeViewer file="fsaa g checkout-report — real output" lang="text" code={G_OUT} />
+      <CodeViewer file="fsaa g checkout-report — real output" lang="text" code={G_OUT} copyText="fsaa g checkout-report" />
 
       <h2 id="no-tty">Scripts and CI — no prompts, no hanging</h2>
       <p>
@@ -60,7 +60,7 @@ export default function CliPage() {
         answers fall back to defaults (<code>my-app</code>, template <code>next</code>) — and it
         says so in the log, once:
       </p>
-      <CodeViewer file="npm create fsaa@latest -- init --name ci-app --template vite" lang="text" code={NO_TTY} />
+      <CodeViewer file="npm create fsaa@latest -- init --name ci-app --template vite" lang="text" code={NO_TTY} copyText="npm create fsaa@latest -- init --name ci-app --template vite" />
       <p>
         Note the <code>--</code> after <code>npm create fsaa@latest</code>: everything after it goes
         into the CLI itself (npm&rsquo;s separator, same as <code>npm create vite</code>). For

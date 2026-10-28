@@ -11,11 +11,12 @@ type CodeFrameProps = {
   file: string;
   lang: CodeLang;
   lines: Token[][];
+  copyText?: string;
   className?: string;
 };
 
-export function CodeFrame({ file, lang, lines, className }: CodeFrameProps) {
-  const raw = lines.map((line) => line.map((tk) => tk.t).join('')).join('\n');
+export function CodeFrame({ file, lang, lines, className, copyText }: CodeFrameProps) {
+  const raw = copyText ?? lines.map((line) => line.map((tk) => tk.t).join('')).join('\n');
   const isTree = lang === 'tree';
 
   return (
@@ -53,10 +54,13 @@ type CodeViewerProps = {
   file: string;
   lang: CodeLang;
   code: string;
+  /** What the Copy button copies. Used to hand the user the RUNNABLE
+   *  command for terminal-output blocks (instead of the whole log). */
+  copyText?: string;
   className?: string;
 };
 
-export function CodeViewer({ file, lang, code, className }: CodeViewerProps) {
+export function CodeViewer({ file, lang, code, copyText, className }: CodeViewerProps) {
   const lines = lang === 'tree' ? tokenizeTree(code) : [tokenize(code)];
-  return <CodeFrame file={file} lang={lang} lines={lines} className={className} />;
+  return <CodeFrame file={file} lang={lang} lines={lines} copyText={copyText} className={className} />;
 }
