@@ -48,11 +48,15 @@ Verify (agents/add-module.md):
   pnpm lint · pnpm typecheck · pnpm test
   node scripts/check-agents-md.mjs`;
 
-export const NO_TTY = `fsaa init < /dev/null        # in CI / piped stdin
+/* captured live 28.10: a scaffolding inside a script (stdin not a terminal) */
+export const NO_TTY = `$ npm create fsaa@latest -- init --name ci-app --template vite
 
-  (no TTY — defaults applied: name=my-app, template=next;
+  (no TTY - defaults applied: name=my-app, template=next;
    pin them with --name/--template)
-  ...scaffold runs to the same green drift-check`;
+  ...
+> running the contract drift-check as proof…
+  ✓ AGENTS.md OK: 11 rules verified · contract intact · 0.0s
+  ✔ ci-app is ready (plain React (Vite + react-router))`;
 
 export type CommandRow = { cmd: string; what: string };
 
