@@ -62,7 +62,7 @@ export default function AgenticPage() {
         The green case: every contract rule verified on every PR. The check runs in CI (
         <code>.github/workflows/</code>) and locally in under a second:
       </p>
-      <CodeViewer file="node scripts/check-agents-md.mjs — green run" lang="text" code={GREEN_RUN} />
+      <CodeViewer file="node scripts/check-agents-md.mjs — green run" lang="text" code={GREEN_RUN} copyText="node scripts/check-agents-md.mjs" />
 
       <p>
         Three ways it goes red — and each message tells you exactly what broke. The third one is
@@ -70,9 +70,9 @@ export default function AgenticPage() {
         bundler resolves them, because a plain <code>../..</code> regex cannot tell an
         illegal cross-slice hop from a legal dive down to entities:
       </p>
-      <CodeViewer file="a rule with no check mapped" lang="text" code={RED_BINDING} />
-      <CodeViewer file="code drifted from the rule" lang="text" code={RED_DRIFT} />
-      <CodeViewer file="relative cross-slice import (v4.4)" lang="text" code={RED_RELATIVE} />
+      <CodeViewer file="a rule with no check mapped" lang="text" code={RED_BINDING} copyText="node scripts/check-agents-md.mjs" />
+      <CodeViewer file="code drifted from the rule" lang="text" code={RED_DRIFT} copyText="node scripts/check-agents-md.mjs" />
+      <CodeViewer file="relative cross-slice import (v4.4)" lang="text" code={RED_RELATIVE} copyText="node scripts/check-agents-md.mjs" />
 
       <Callout tone="rule" label="The rule behind the check">
         A rule with no check is red, a check with no rule is red. This came out of a real bug:
