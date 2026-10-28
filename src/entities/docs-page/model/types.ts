@@ -4,6 +4,7 @@ export type DocsPageId =
   | 'home'
   | 'architecture'
   | 'agentic'
+  | 'cli'
   | 'graduation'
   | 'example'
   | 'comparison'

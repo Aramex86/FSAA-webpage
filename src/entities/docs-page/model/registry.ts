@@ -28,6 +28,14 @@ export const DOCS_PAGES: DocsPage[] = [
     keywords: ['agents', 'agentic', 'ai', 'claude', 'cursor', 'contract', 'agents md', 'drift', 'drift check', 'procedures', 'skills'],
   },
   {
+    id: 'cli',
+    slug: '/cli',
+    group: 'Core rules',
+    title: 'CLI — npm create fsaa@latest',
+    nav: 'CLI',
+    keywords: ['cli', 'create-fsaa', 'npx', 'npm create', 'scaffold', 'scaffolding', 'generator', 'fsaa g', 'init'],
+  },
+  {
     id: 'graduation',
     slug: '/graduation',
     group: 'Core rules',

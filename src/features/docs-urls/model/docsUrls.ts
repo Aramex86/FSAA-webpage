@@ -13,6 +13,7 @@ export type DocsSitemapEntry = {
 const PRIORITY_BY_SLUG: Record<string, number> = {
   '/': 1.0,
   '/architecture': 0.9,
+  '/cli': 0.8,
   '/agentic': 0.8,
   '/graduation': 0.8,
   '/example': 0.8,
