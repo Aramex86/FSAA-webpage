@@ -8,6 +8,7 @@ import {
   CONTRACT_SNIPPET,
   RED_BINDING,
   RED_DRIFT,
+  RED_RELATIVE,
   GREEN_RUN,
   CHECKLIST_SNIPPET,
   PROCEDURE_ROWS,
@@ -63,14 +64,22 @@ export default function AgenticPage() {
       </p>
       <CodeViewer file="node scripts/check-agents-md.mjs — green run" lang="text" code={GREEN_RUN} />
 
-      <p>The two ways it goes red — and both messages tell you exactly what broke:</p>
+      <p>
+        Three ways it goes red — and each message tells you exactly what broke. The third one is
+        the newest (v4.4): relative imports that leave your slice are <em>resolved</em> like a
+        bundler resolves them, because a plain <code>../..</code> regex cannot tell an
+        illegal cross-slice hop from a legal dive down to entities:
+      </p>
       <CodeViewer file="a rule with no check mapped" lang="text" code={RED_BINDING} />
       <CodeViewer file="code drifted from the rule" lang="text" code={RED_DRIFT} />
+      <CodeViewer file="relative cross-slice import (v4.4)" lang="text" code={RED_RELATIVE} />
 
       <Callout tone="rule" label="The rule behind the check">
         A rule with no check is red, a check with no rule is red. This came out of a real bug:
         the &ldquo;which package manager is in charge&rdquo; fact lived in three places at once,
         and the CI went red ten seconds after a push that contained zero application lines.
+        v4.4 also closes the parity gap the other way — ESLint and the drift-check now catch
+        exactly the same violations, barrels (<code>index.ts</code>) included.
       </Callout>
 
       <h2 id="procedures">Procedures — what the agent runs, step by step</h2>
@@ -104,10 +113,14 @@ export default function AgenticPage() {
         Four steps, in order — none of them optional, all of them verified by the checks above:
       </p>
       <ol>
-        <li>Generate your app from a template (CLI in work; today: clone the template repo).</li>
+        <li>
+          Scaffold your app with the CLI — <code>npx github:Aramex86/fsaa init</code> (npm registry
+          package ships next). It downloads a starter, installs deps, and ends with a green
+          drift-check as proof.
+        </li>
+        <li>Generate slices inside the project: <code>npx github:Aramex86/fsaa g &lt;slice-name&gt;</code>.</li>
         <li>Cold start with <code>agents/run-stack.md</code> — install, dev up, green checks.</li>
-        <li>Point your agent (Claude Code, Cursor, …) at <code>AGENTS.md</code> and <code>agents/</code>.</li>
-        <li>Keep main protected PR-only; drift-check + lint run on every PR.</li>
+        <li>Point your agent (Claude Code, Cursor, …) at <code>AGENTS.md</code> and <code>agents/</code>; keep main protected PR-only — drift-check + lint + tests run on every PR.</li>
       </ol>
 
       <ProofBadge>
