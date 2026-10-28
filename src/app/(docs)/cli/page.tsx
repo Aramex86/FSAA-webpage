@@ -54,11 +54,19 @@ export default function CliPage() {
       </p>
       <CodeViewer file="fsaa g checkout-report — real output" lang="text" code={G_OUT} />
 
-      <h2 id="no-tty">Scripts and CI</h2>
+      <h2 id="no-tty">Scripts and CI — no prompts, no hanging</h2>
       <p>
-        Without a TTY the CLI does not hang: defaults apply automatically and the run completes:
+        When the CLI runs from a script, there is no keyboard. So it does not wait: missing
+        answers fall back to defaults (<code>my-app</code>, template <code>next</code>) — and it
+        says so in the log, once:
       </p>
-      <CodeViewer file="running from a script or CI" lang="text" code={NO_TTY} />
+      <CodeViewer file="npm create fsaa@latest -- init --name ci-app --template vite" lang="text" code={NO_TTY} />
+      <p>
+        Note the <code>--</code> after <code>npm create fsaa@latest</code>: everything after it goes
+        into the CLI itself (npm&rsquo;s separator, same as <code>npm create vite</code>). For
+        deterministic pipelines pin BOTH values explicitly; the run ends with the same green
+        drift-check as an interactive one.
+      </p>
 
       <h2 id="birth">The name — as it actually happened</h2>
       <Callout tone="quote" label="npm renamed us before we shipped">
