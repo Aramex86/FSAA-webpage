@@ -36,6 +36,7 @@ export default function HomePage() {
       </p>
 
       <div className="cta">
+        <Button href="/cli">Try the CLI →</Button>
         <Button href="/architecture">Read the architecture →</Button>
         <Button variant="ghost" href="/graduation">
           The graduation pattern
