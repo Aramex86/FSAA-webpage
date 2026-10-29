@@ -44,7 +44,10 @@ export default function CliPage() {
 
       <p>
         The final step is the agent contract itself: <code>AGENTS.md</code> is verified against the
-        freshly unpacked code before the CLI reports success — a scaffold cannot lie.
+        freshly unpacked code before the CLI reports success — a scaffold cannot lie. The code
+        checks run through <code>eslint-plugin-fsaa</code> — the same npm rules the scaffold wires
+        into <code>eslint.config.mjs</code>, so the contract and your linter share one
+        implementation from day one.
       </p>
 
       <h2 id="g">fsaa g — generate a canonical slice</h2>
@@ -82,7 +85,7 @@ export default function CliPage() {
       <p>Scaffolds prove themselves — run the same battery any time:</p>
       <ol>
         <li><code>pnpm lint</code> · <code>pnpm typecheck</code> · <code>pnpm test</code></li>
-        <li><code>node scripts/check-agents-md.mjs</code> — 11 rules green</li>
+        <li><code>node scripts/check-agents-md.mjs</code> — 12 rules green (code checks via eslint-plugin-fsaa)</li>
       </ol>
 
       <DocsPager current="cli" />
