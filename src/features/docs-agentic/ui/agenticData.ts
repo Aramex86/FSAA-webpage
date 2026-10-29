@@ -1,7 +1,9 @@
 /* docs-agentic — real fragments from the FSAA starter templates (fsaa-next / fsaa-vite).
    Every snippet here mirrors a file that ships in the templates; keep them in sync
    with the templates (the templates are the source of truth). Last sync: 28.10,
-   drift-check v4.4 (relative cross-slice imports resolved like a bundler does). */
+   drift-check v4.6 — code checks run through eslint-plugin-fsaa@0.1.1, the
+    same rules the templates wire into eslint.config.mjs (v4.4 contributed the
+    relative cross-slice resolution; v4.5 the script-policy). */
 
 export const CONTRACT_SNIPPET = `# AGENTS.md — FSAA machine contract (excerpt)
 
@@ -13,16 +15,16 @@ src/features/**/ui/**, src/shared/ui/** and app/** pages must NOT call
 fetch/axios directly. Data access belongs to feature logic (index.ts
 / entity API).`;
 
-export const RED_BINDING = `FSAA drift-check  v4.4
-  AGENTS.md: 12 rules · fsaa:contract
+export const RED_BINDING = `FSAA drift-check  v4.6
+  AGENTS.md: 12 rules · code checks: eslint-plugin-fsaa
   ...
   ⚠ rule fake-rule-999 has a marker but no check is mapped
 
   ✗ drift detected: 0 rule(s), 1 binding issue(s) · 0.0s
 exit code: 1`;
 
-export const RED_DRIFT = `FSAA drift-check  v4.4
-  AGENTS.md: 11 rules · fsaa:contract
+export const RED_DRIFT = `FSAA drift-check  v4.6
+  AGENTS.md: 12 rules · code checks: eslint-plugin-fsaa
   ...
   ✓ boundary-imports 3ms
   ✗ no-ui-fetch 1ms — fetch/axios found in: src/features/orders-overview/ui/OrdersOverview.tsx
@@ -32,8 +34,8 @@ export const RED_DRIFT = `FSAA drift-check  v4.4
   ✗ drift detected: 1 rule(s), 0 binding issue(s) · 0.0s
 exit code: 1`;
 
-export const GREEN_RUN = `FSAA drift-check  v4.4
-  AGENTS.md: 11 rules · fsaa:contract
+export const GREEN_RUN = `FSAA drift-check  v4.6
+  AGENTS.md: 12 rules · code checks: eslint-plugin-fsaa
   ──────────────────────────────────────────────
   ✓ cmd-pnpm-install 0ms
   ✓ cmd-pnpm-dev 0ms
@@ -47,14 +49,14 @@ export const GREEN_RUN = `FSAA drift-check  v4.4
   ✓ file-paths 0ms
   ✓ pr-flow 0ms
   ──────────────────────────────────────────────
-  ✓ AGENTS.md OK: 11 rules verified · contract intact · 0.0s`;
+  ✓ AGENTS.md OK: 12 rules verified · contract intact · 0.0s`;
 
 /* captured live 28.10: a cross-slice RELATIVE import ("import { x }
    from '../../projects-overview'") inside a feature's ui/ file —
    specifier regexes can't tell it from a legal ../../entities import,
-   so v4.4 resolves the specifier like a bundler does. */
-export const RED_RELATIVE = `FSAA drift-check  v4.4
-  AGENTS.md: 11 rules · fsaa:contract
+   so the check resolves the specifier like a bundler does (since v4.4). */
+export const RED_RELATIVE = `FSAA drift-check  v4.6
+  AGENTS.md: 12 rules · code checks: eslint-plugin-fsaa
   ...
   ✗ boundary-imports 3ms — upward/cross-slice imports in: src/features/orders-overview/ui/OrdersOverview.tsx
   ...

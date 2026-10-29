@@ -43,10 +43,10 @@ const PHASES: Phase[] = [
   {
     id: "phase-3",
     label: "Phase 3",
-    title: "CLI — npx fsaa init",
+    title: "CLI + contract tooling — shipped",
     detail:
-      "Scaffold (npx fsaa init), slice generator (fsaa g), standalone eslint-plugin-fsaa — plus an agent skill that teaches AI coding agents where UI goes, and fsaa audit for boundary drift in existing codebases.",
-    status: "In progress",
+      "npm create fsaa@latest scaffold, fsaa g generators (pair/entity/feature/atom/molecule/page), eslint-plugin-fsaa (the contract as npm lint rules, single source with drift-check v4.6), agents skills for AI coders, and fsaa audit for boundary drift in existing codebases — all published and verified end-to-end.",
+    status: "Done",
   },
   {
     id: "phase-4",
@@ -66,8 +66,8 @@ type GapRow = {
 const GAP_ROWS: GapRow[] = [
   {
     id: "templates",
-    gap: "Boilerplate ships as a Git template (clone-and-rename), not an npm CLI yet.",
-    plan: "Phase 3: npx fsaa init (asks next/vite) + slice generator.",
+    gap: "Boilerplate ships as an npm CLI scaffold — done (npm create fsaa@latest).",
+    plan: "Done in Phase 3; adoption feedback in Phase 4.",
   },
   {
     id: "ssr-recipes",
@@ -76,8 +76,8 @@ const GAP_ROWS: GapRow[] = [
   },
   {
     id: "tooling",
-    gap: "Slice scaffolding is manual; boundaries enforced by bundled ESLint config.",
-    plan: "Phase 3: slice generator + standalone eslint-plugin-fsaa.",
+    gap: "Scaffolding and boundary rules are the plugin's job now (eslint-plugin-fsaa).",
+    plan: "Done in Phase 3; rules change only with adopter evidence (Phase 4).",
   },
   {
     id: "cases",
