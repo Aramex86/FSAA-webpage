@@ -81,6 +81,18 @@ export const COMMANDS: CommandRow[] = [
     what: "Generate the canonical pair (entity + feature + thin route) inside an existing FSAA app. Slices are kebab-case.",
   },
   {
+    cmd: "fsaa g entity|feature <name>",
+    what: "Same canon as the pair, one side at a time: entity = index/types/api/slice/__tests__, feature = index/ui/config/__tests__. Name matches the entity the feature consumes.",
+  },
+  {
+    cmd: "fsaa g atom|molecule <Name>",
+    what: "Shared primitives: atoms/<Name>.tsx (stateless) and molecules/<Name>/ — with the graduation hint printed (shared earns its place on the SECOND duplication). PascalCase.",
+  },
+  {
+    cmd: "fsaa g page <name> [route]",
+    what: "Thin page composing an EXISTING feature (+ router registration on vite). Refuses to scaffold an orphan page — pages compose features.",
+  },
+  {
     cmd: "fsaa help",
     what: "The help screen above.",
   },
