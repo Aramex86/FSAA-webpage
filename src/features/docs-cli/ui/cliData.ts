@@ -1,4 +1,4 @@
-/* docs-cli — real fragments from the published create-fsaa package (0.1.7).
+/* docs-cli — real fragments from the published create-fsaa package (0.2.0).
    The npm registry is the source of truth for these snippets; sync on releases.
    Re-captured live 29.10: v4.6 drift-check delegates code checks to
    eslint-plugin-fsaa@0.1.1 (wired into the templates' eslint config). */
@@ -52,14 +52,36 @@ Verify (agents/add-module.md):
   node scripts/check-agents-md.mjs`;
 
 /* captured live 28.10: a scaffolding inside a script (stdin not a terminal) */
-export const NO_TTY = `$ npm create fsaa@latest -- init --name ci-app --template vite
+export const NO_TTY = `$ npm create fsaa@latest -- init --name ci-app --template vite   (script: no keyboard)
+> downloading template (codeload tarball)…
+> renaming project…
+> installing dependencies (this may take a minute)…
 
-  (no TTY - defaults applied: name=my-app, template=next;
-   pin them with --name/--template)
-  ...
 > running the contract drift-check as proof…
-  ✓ AGENTS.md OK: 11 rules verified · contract intact · 0.0s
-  ✔ ci-app is ready (plain React (Vite + react-router))`;
+  FSAA drift-check  v4.6
+  AGENTS.md: 12 rules · code checks: eslint-plugin-fsaa
+  ──────────────────────────────────────────────
+  ✓ cmd-pnpm-install 0ms
+  ✓ cmd-pnpm-dev 0ms
+  ✓ cmd-pnpm-lint 0ms
+  ✓ cmd-pnpm-typecheck 0ms
+  ✓ cmd-pnpm-build 0ms
+  ✓ script-policy 0ms
+  ✓ single-lockfile 0ms
+  ✓ ui-location 746ms
+  ✓ boundary-imports 0ms
+  ✓ no-ui-fetch 0ms
+  ✓ file-paths 0ms
+  ✓ pr-flow 0ms
+  ──────────────────────────────────────────────
+  ✓ AGENTS.md OK: 12 rules verified · contract intact · 0.7s
+
+====================================================
+  ✔ ci-app is ready (plain React (Vite + react-router))
+  cd ci-app
+  pnpm run dev
+  agent contract: AGENTS.md · skills: agents/ · lint rules: eslint-plugin-fsaa
+====================================================`;
 
 export type CommandRow = { cmd: string; what: string };
 
