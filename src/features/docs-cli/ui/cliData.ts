@@ -1,11 +1,13 @@
-/* docs-cli — real fragments from the published create-fsaa package (0.1.3).
-   The npm registry is the source of truth for these snippets; sync on releases. */
+/* docs-cli — real fragments from the published create-fsaa package (0.1.7).
+   The npm registry is the source of truth for these snippets; sync on releases.
+   Re-captured live 29.10: v4.6 drift-check delegates code checks to
+   eslint-plugin-fsaa@0.1.1 (wired into the templates' eslint config). */
 
 export const INIT_GREEN = `> FSAA init — Feature-Sliced Atomic Architecture
 
   template: plain React (Vite + react-router)
   manager:  pnpm (contract)
-  target:   ./final-app
+  target:   ./probe-app
 
 > downloading template (codeload tarball)…
 > renaming project…
@@ -13,29 +15,30 @@ export const INIT_GREEN = `> FSAA init — Feature-Sliced Atomic Architecture
 
 > running the contract drift-check as proof…
 
-  FSAA drift-check  v4.4
-  AGENTS.md: 11 rules · fsaa:contract
+  FSAA drift-check  v4.6
+  AGENTS.md: 12 rules · code checks: eslint-plugin-fsaa
   ──────────────────────────────────────────────
   ✓ cmd-pnpm-install 0ms
   ✓ cmd-pnpm-dev 0ms
   ✓ cmd-pnpm-lint 0ms
   ✓ cmd-pnpm-typecheck 0ms
   ✓ cmd-pnpm-build 0ms
+  ✓ script-policy 0ms
   ✓ single-lockfile 0ms
-  ✓ ui-location 0ms
-  ✓ boundary-imports 3ms
-  ✓ no-ui-fetch 1ms
+  ✓ ui-location 687ms
+  ✓ boundary-imports 0ms
+  ✓ no-ui-fetch 0ms
   ✓ file-paths 0ms
   ✓ pr-flow 0ms
   ──────────────────────────────────────────────
-  ✓ AGENTS.md OK: 11 rules verified · contract intact · 0.0s
+  ✓ AGENTS.md OK: 12 rules verified · contract intact · 0.7s
 
 ====================================================
-  ✔ final-app is ready (plain React (Vite + react-router))
-  cd final-app
+  ✔ probe-app is ready (plain React (Vite + react-router))
+  cd probe-app
   pnpm run dev
-  agent contract: AGENTS.md · skills: agents/
-  generate slices: pnpm exec fsaa g <slice-name>
+  agent contract: AGENTS.md · skills: agents/ · lint rules: eslint-plugin-fsaa
+  generate slices: pnpm exec fsaa g <slice-name> (or: npx create-fsaa g <slice-name>)
 ====================================================`;
 
 export const G_OUT = `fsaa g checkout-report

@@ -1,0 +1,40 @@
+npm notice run fsaa-site@0.2.0 build
+npm notice run next build
+   ▲ Next.js 15.1.6
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/15) ...
+   Generating static pages (3/15) 
+   Generating static pages (7/15) 
+   Generating static pages (11/15) 
+ ✓ Generating static pages (15/15)
+   Finalizing page optimization ...
+   Collecting build traces ...
+   Exporting (0/3) ...
+ ✓ Exporting (3/3)
+
+Route (app)                              Size     First Load JS
+┌ ○ /                                    3.08 kB         112 kB
+├ ○ /_not-found                          137 B           106 kB
+├ ○ /adoption                            904 B           110 kB
+├ ○ /agentic                             2.13 kB         111 kB
+├ ○ /architecture                        3.06 kB         112 kB
+├ ○ /cli                                 2.13 kB         111 kB
+├ ○ /comparison                          171 B           109 kB
+├ ○ /example                             2.13 kB         111 kB
+├ ○ /graduation                          2.13 kB         111 kB
+├ ○ /qa                                  172 B           109 kB
+├ ○ /roadmap                             904 B           110 kB
+├ ○ /robots.txt                          0 B                0 B
+└ ○ /sitemap.xml                         0 B                0 B
++ First Load JS shared by all            105 kB
+  ├ chunks/4bd1b696-1aaacd546f10f1e9.js  52.9 kB
+  ├ chunks/517-e785fead021097a5.js       50.6 kB
+  └ other shared chunks (total)          1.91 kB
+
+
+○  (Static)  prerendered as static content
+
